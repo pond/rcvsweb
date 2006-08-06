@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de" dir="ltr">
+  <head>
+    <title>RISC OS Open: Bugs and sources: <%= @title %></title>
+
+    <meta name="robots" content="nofollow" />
+    <meta name="generator" content="FreeBSD-CVSweb 3.0.6" />
+
+    <link rel="stylesheet" type="text/css" href="/css/risc_os_open.css" />
+    <link rel="stylesheet" type="text/css" href="/perl/cvsweb/css/cvsweb.css" />
+  </head>
+  <body>
+<%= render 'shared/fixed_header' %>
+
+    <!-- Contents -->
+
+    <p />
+    <div class="sidebar">
+<%= render 'shared/fixed_sidebar' %>
+    </div>
+    <div id="content">
+<%= @content_for_layout %>
+    </div>
+
+    <br clear="all" />
+<%= render 'shared/fixed_footer' %>
+  </body>
+</html>
