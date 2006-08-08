@@ -57,6 +57,8 @@ class RcvswebController < ApplicationController
     end # From needed.each
 
     # Add the CVSweb command to the command string and execute it.
+    # We have to put this in an instance variable rather than a
+    # temporary variable as otherwise send_data doesn't work...
 
     command += "#{CVSWEB_LOCATION}"
     @output  = `#{command}`
@@ -74,6 +76,18 @@ class RcvswebController < ApplicationController
       headstr.downcase.split("\r\n").each do |str|
         pos = str.index(':')
         headers[str.slice!(0..pos - 1).strip] = str[1..-1].strip if (pos > 1)
+      end
+
+      # If we find a Status header with a 300-series code, check for a
+      # Location header too. If found, redirect to that location.
+
+      if (headers['status'])
+        code = headers['status'].to_i
+
+        if (code >= 300 and code < 400 and headers['location'])
+          redirect_to headers['location']
+          return
+        end
       end
 
       # For a content type of 'text/html', render within a View. Otherwise

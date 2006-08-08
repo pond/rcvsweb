@@ -1,4 +1,4 @@
-RCVSweb v0.0.2, 06-Aug-2006
+RCVSweb v0.0.3, 08-Aug-2006
 ===========================
 
 RCVSweb is a Ruby On Rails wrapper around the CVSweb utility. A single
@@ -23,4 +23,4 @@ the following location:
 
   http://www.freebsd.org/projects/cvsweb.html
 
--- Last updated 06-Aug-2006.
+-- Last updated 08-Aug-2006.
