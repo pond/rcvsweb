@@ -1,0 +1,350 @@
+/* RISC OS Open FreeBSD-CVSweb stylesheet for RCVSweb
+ * wrapper application.
+ *
+ * Based on the FreeBSD-CVSweb default stylesheet.
+ */
+
+DIV#content H1
+{
+  margin: 0;
+  padding: 5px;
+  font-size: 150%;
+  border: 1px solid #333;
+  color: #9a9a9a;
+  background: #ffe;
+}
+
+DIV#content H3
+{
+  margin: 12px 0;
+}
+
+/*
+DIV#content
+{
+  display: block;
+  margin: 0 29% 0 8%;
+  padding-right: 1%;
+  border-right: 1px solid #e5ffd4;
+}
+
+DIV.sidebar
+{
+  display: block;
+  width: 20%;
+  float: right;
+  margin-right: 8%;
+  padding-left: 1%;
+  border-left: 1px solid #e5ffd4;
+}
+*/
+
+HR
+{
+  height: 1px;
+  border: none;
+  background-color: #e5ffd4;
+  padding: 0;
+}
+
+A[name]
+{
+  text-decoration: none;
+  color: #000;
+  border: none;
+  font-size: 80%;
+}
+
+DIV#revisions A
+{
+  border: none;
+}
+
+DIV#revisions H2
+{
+  padding: 0;
+  font-size: 160%;
+  margin-bottom: 10px;
+}
+
+DIV#revisions H3
+{
+  margin: 0;
+  font-size: 140%;
+}
+
+/* Forms (from Collaboa CSS file, with tweaks) */
+
+FIELDSET
+{
+  display: block;
+  margin: 10px 0 10px 0;
+  border: 1px solid #ccc;
+  background: #f6f6f6;
+}
+
+FIELDSET LEGEND
+{
+  padding: 2px 10px 2px 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+LEGEND
+{
+  font-weight: bold;
+  font-size: 80%;
+}
+
+LABEL
+{
+  font-size: 80%;
+}
+
+LABEL.first
+{
+  padding-top: 10px;
+}
+
+FIELDSET BR
+{
+  display: block;
+}
+
+/* Generic nowrap class */
+
+.nowrap
+{
+  white-space: nowrap;
+}
+
+/* Source, diff and annotate views */
+
+.src
+{
+  color: #000;
+  background-color: #eee;
+  font-style: normal;
+  font-weight: normal;
+}
+
+PRE
+{
+  font-size: 90%;
+  overflow: auto;
+}
+
+/* Navigation header for source views, diffs and annotations */
+
+.navigate-header
+{
+  background-color: #eee;
+  padding: 2px;
+  font-size: 80%;
+}
+
+/* Directory listing */
+
+TABLE.dir
+{
+  font-size: 80%;
+}
+
+TABLE.dir TD A
+{
+  border: none;
+}
+
+/* Cells */
+
+TABLE.dir * TD {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* Column headers */
+
+TABLE.dir * TH
+{
+  background-color: #ddd;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* Sorted column header */
+
+TABLE.dir * TH.sorted
+{
+  background-image: url("/rails/collaboa/images/sort_desc.png");
+  background-repeat: no-repeat;
+  padding-right: 12px;
+  background-position: 99% 50%;
+  background-color: #ddd;
+}
+
+/* Even rows */
+
+TABLE.dir * TR.even
+{
+  background-color: #fbfbfb;
+}
+
+/* Odd rows */
+
+TABLE.dir * TR.odd
+{
+  background-color: #f1f1f1;
+}
+
+/* File and dir name columns */
+
+TABLE.dir * TD.file, TABLE.dir * TD.dir
+{
+  white-space: nowrap;
+}
+
+/* Graph link column */
+
+TABLE.dir * TD.graph
+{
+  padding-left: 3px;
+  padding-right: 3px;
+  text-align: center;
+  width: 1%;
+}
+
+/* Age column */
+
+TABLE.dir * TD.age
+{
+  font-style: italic;
+  white-space: nowrap;
+}
+
+TABLE.dir * TD.author
+{
+  white-space: nowrap;
+}
+
+/* Log entry column */
+
+TABLE.dir * TD.log
+{
+  font-size: smaller;
+}
+
+/* Attic toggles in directory view */
+
+.attic
+{
+  font-size: smaller;
+}
+
+/* Option table labels and values */
+
+.opt-label
+{
+  text-align: right;
+  padding-left: 0.5em;
+}
+
+.opt-value
+{
+  padding-right: 0.5em;
+}
+
+/* Log entry in markup */
+
+.log-markup
+{
+  background-color: #fff;
+  width: 100%;
+}
+
+/* Diff-selected revision in log */
+
+.diff-selected {
+  padding-right: 0.5em;
+  border-right: 10px solid #fc6;
+}
+
+/* 'Line'-header of each diffed file */
+
+.diff-heading
+{
+  background-color: #9cc;
+  border: 2px outset;
+  padding: 5px;
+}
+
+/* Common properties for diff "contents" */
+
+.diff
+{
+  font-family: sans-serif;
+  font-size: smaller;
+}
+
+/* Lines that are the same */
+
+.diff-same
+{
+  background-color: inherit;
+}
+
+/* Empty lines */
+
+.diff-empty
+{
+  background-color: #ccc;
+}
+
+/* Added lines */
+
+.diff-added
+{
+  background-color: #9f9;
+}
+
+/* Removed lines */
+
+.diff-removed
+{
+  background-color: #f99;
+}
+
+/* Changed lines */
+
+.diff-changed
+{
+  background-color: #ff6;
+}
+
+/* Empty changed lines */
+
+.diff-changed-missing
+{
+  background-color: #ee6;
+}
+
+/* Unchanged text in ediffs */
+
+.diff-unchanged
+{
+  background-color: #ccc;
+}
+
+/* Current revision lines in annotate view */
+
+.current-rev
+{
+  font-weight: bold;
+}
+
+/* Download links */
+
+.download-link
+{
+  font-weight: bold;
+}
+

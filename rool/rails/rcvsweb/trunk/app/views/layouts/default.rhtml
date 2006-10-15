@@ -7,22 +7,63 @@
     <meta name="generator" content="FreeBSD-CVSweb 3.0.6" />
 
     <link rel="stylesheet" type="text/css" href="/css/risc_os_open.css" />
-    <link rel="stylesheet" type="text/css" href="/perl/cvsweb/css/cvsweb.css" />
+    <%= stylesheet_link_tag '/stylesheets/rcvsweb.css' %>
   </head>
   <body>
 <%= render 'shared/fixed_header' %>
 
-    <!-- Contents -->
+    <!-- CVSweb contents table -->
 
     <p />
-    <div class="sidebar">
-<%= render 'shared/fixed_sidebar' %>
-    </div>
-    <div id="content">
+    <table width="85%" cellspacing="0" cellpadding="0" align="center">
+      <tr valign="top" align="left">
+        <td width="75%">
+          <%= '<h2 align="left" class="notice">' + flash[:notice] + '</h2><p>' if (flash[:notice]) %><%= '<h2 align="left" class="attention">' + flash[:attention] + '</h2><p>' if (flash[:attention]) %><%= '<h2 align="left" class="alert">' + flash[:alert] + '</h2><p>' if (flash[:alert]) %>
+          <div id="content">
 <%= @content_for_layout %>
-    </div>
+          </div>
+        </td>
 
-    <br clear="all" />
+        <td>&nbsp;&nbsp;</td>
+        <td bgcolor="#bbbbbb" class="column_divider"><img src="/images/utilities/blank.gif" width="1" height="1" alt="." border="0" /></td>
+        <td>&nbsp;&nbsp;</td>
+
+        <td width="25%">
+          <div class="sidebar">
+            <div class="sidebar-node">
+              <h3>Search for CVS module</h3>
+
+              <p />
+              <div class="sidebar_static">
+                <%= form_tag( {}, :method => 'get') %>
+                  <input type="text" id="mpath" name="path" value="" size="15" />
+                  <input type="submit" value="Go" />
+                <%= end_form_tag %>
+              </div>
+            </div>
+
+<%= render 'shared/fixed_sidebar' %>
+
+            <p />
+            <div class="sidebar-node">
+
+              <h3>Options</h3>
+
+              <p />
+              <ul>
+                <li><a href="/rails/collaboa/">Tickets</a></li>
+                <li><a href="/rails/collaboa/milestones">Milestones</a></li>
+                <li>Subversion: <a href="/rails/collaboa/repository/changesets">Changesets</a></li>
+                <li>Subversion: <a href="/rails/collaboa/repository/browse">Browse</a></li>
+                <li>CVS: <%= link_to 'Revisions', { :controller => 'revisions', :action => 'list' } %></li>
+                <li>CVS: <%= link_to 'Browse', { :controller => 'rcvsweb', :action => 'run' } %></li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
 <%= render 'shared/fixed_footer' %>
   </body>
 </html>

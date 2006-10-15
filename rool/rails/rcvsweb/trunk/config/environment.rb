@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '1.1.4'
+#RAILS_GEM_VERSION = '1.1.5'
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -13,10 +13,11 @@ require File.join(File.dirname(__FILE__), 'boot')
 # Location of application relative to document root in terms of
 # URLs (i.e. according to the web server configuration, not the
 # filesystem location) and location in the filesystem, rather than
-# according to the Web server, of the CVSweb script.
+# according to the Web server, of the CVSweb and CVShistory scripts.
 
-PATH_PREFIX     = '/rails/rcvsweb'
-CVSWEB_LOCATION = '/home/adh/perl/cvsweb/cvsweb.cgi'
+PATH_PREFIX         = '/rails/rcvsweb'
+CVSWEB_LOCATION     = '/home/adh/perl/cvsweb/cvsweb.cgi'
+CVSHISTORY_LOCATION = '/home/adh/python/cvshistory/cvshistory.cgi'
 
 Rails::Initializer.run do |config|
   # We don't run in the document root, so images etc. must come from
@@ -36,6 +37,9 @@ Rails::Initializer.run do |config|
 end
 
 # Allow multiple Rails applications by giving the session cookie a
-# unique prefix.
+# unique prefix. In this application the ApplicationController class
+# turns sessions off (at the time of writing, 22-Aug-2006) anyway,
+# but in future sessions may be used again in which case the line
+# below will be important.
 
 ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS[:session_key] = 'rcvswebapp_session_id'
