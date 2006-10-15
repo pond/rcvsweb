@@ -1,0 +1,61 @@
+      You are currently browsing the <b>CVS</b> repository.<br />
+      The Subversion repository is <a href="/rails/collaboa/repository/browse">here</a>.
+
+<%
+  common = @output[0]
+
+  if common[:folder] && common[:folder].length > 40
+    folder = '...' + common[:folder][-40..-1]
+  else
+    folder = common[:folder] || ''
+  end
+-%>
+      <div class="breadcrumbs">
+        <ul>
+          <li><%= link_to 'Revisions', { :action => 'list' } %></li>
+          <li>&#187; Revision <%= common[:revision] %> of <%= folder %></li>
+        </ul>
+      </div>
+
+      <div id="revisions">
+        <h2>Revision <%= common[:revision] %></h2>
+        <strong>of <%= folder %></strong>
+
+        <p>
+        <div class="log">
+          <%= format_with_collaboa_links(common[:log]) %>
+        </div>
+
+        <ul class="changes">
+          <li><strong>Comitted by:</strong> <%= common[:author] %></li>
+          <li><strong>Date:</strong> <%= common[:date] %> (<%= time_ago_in_words(common[:date]) %> ago)</li>
+        </ul>
+
+        <h2>Affected files:</h2>
+        <ul class="changes">
+<% @output.each do |file| -%>
+          <li class="change-name">
+<%
+  if @category_map.include? file[:category]
+    imgsrc = @category_map[file[:category]][:image]
+  else
+    imgsrc = @category_map[:unknown][:image]
+  end
+-%>
+            <img alt="<%= file[:category] %>" title="<%= file[:category] %>" src="<%= imgsrc %>" />
+<% if file[:category] != 'Removal' -%>
+            <a href="<%= "#{PATH_PREFIX}/view/#{file[:path]}" %>"><%= file[:path] %></a>
+<% else -%>
+            <%= file[:path] %>
+<% end -%>
+            <%=
+              if @category_map.include? file[:category]
+                @category_map[file[:category]][:text]
+              else
+                @category_map[:unknown][:text]
+              end
+            %>
+          </li>
+<% end -%>
+        </ul>
+      </div>
