@@ -16,6 +16,15 @@
 
 class ApplicationController < ActionController::Base
 
+  # Hub single sign-on support.
+
+  require 'hub_sso_lib'
+  include HubSsoLib::Core
+  before_filter :hubssolib_beforehand
+  after_filter :hubssolib_afterwards
+
+  # Turn of session management.
+
   session :off
 
   # The root URL action.

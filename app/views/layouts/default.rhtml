@@ -18,7 +18,8 @@
     <table width="85%" cellspacing="0" cellpadding="0" align="center">
       <tr valign="top" align="left">
         <td width="75%">
-          <%= '<h2 align="left" class="notice">' + flash[:notice] + '</h2><p>' if (flash[:notice]) %><%= '<h2 align="left" class="attention">' + flash[:attention] + '</h2><p>' if (flash[:attention]) %><%= '<h2 align="left" class="alert">' + flash[:alert] + '</h2><p>' if (flash[:alert]) %>
+          <%= hubssolib_flash_tags -%>
+
           <div id="content">
 <%= @content_for_layout %>
           </div>
