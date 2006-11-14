@@ -21,6 +21,13 @@
           <%= hubssolib_flash_tags -%>
 
           <div id="content">
+            You are currently browsing the <b>CVS</b> repository.<br />
+            Revisions can be listed by
+            <%= link_to 'log message', { :controller => 'revisions', :action => 'list' } %> (fast) or
+            <%= link_to 'revision number', { :controller => 'revisions', :action => 'revisions' } %> (slow).<br />
+            The Subversion repository is <a href="/rails/collaboa/repository/browse">here</a>.
+            <hr />
+
 <%= @content_for_layout %>
           </div>
         </td>
