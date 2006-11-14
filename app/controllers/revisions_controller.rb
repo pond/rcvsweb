@@ -2,9 +2,36 @@ require 'revision_parser'
 
 class RevisionsController < ApplicationController
 
+  # Synthesised revisions: CVS History feed URL
+  #
   @@parser_url = 'http://pond.org.uk/python/cvshistory/cvshistory.cgi?revsel1=na&revsel2=na&datesel1=na&datesel2=na&selop=in&opA=on&opM=on&opR=on&opT=on&limit=1&rss=1'
 
+  # cvslog2web output directory
+  #
+  @@cvslog2web_output = '/home/adh/python/cvslog2web/public'
+
   def list
+    # Use cvslog2web output directly for a list of recent changes.
+
+    render :file => "#{@@cvslog2web_output}/recent.html", :layout => 'default'
+  end
+  
+  def logs
+    # Use cvslog2web output directly for log details of a specific change.
+    # Links are based off an 'ident' parameter pulled in via a query string;
+    # we don't want people putting in "../" etc. to try and navigate around
+    # the server, so strip out ".", "\" and "/".
+
+    log = "#{params[:ident]}"
+    log.gsub!(/\.html$/, '')
+    log.gsub!(/[\.\/\\]/, '')
+
+logger.error("FETCH FILE: #{@@cvslog2web_output}/#{log}.html");
+
+    render :file => "#{@@cvslog2web_output}/#{log}.html", :layout => 'default'
+  end
+  
+  def revisions
     # Create a revision parser for a CVSHistory RSS feed. Get a
     # hash keyed by revision number (as a string), each entry
     # containing an array of RevisionDetails objects. Sort the

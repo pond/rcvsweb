@@ -4,7 +4,7 @@
  * Based on the FreeBSD-CVSweb default stylesheet.
  */
 
-DIV#content H1
+DIV#content > H1
 {
   margin: 0;
   padding: 5px;
@@ -18,26 +18,6 @@ DIV#content H3
 {
   margin: 12px 0;
 }
-
-/*
-DIV#content
-{
-  display: block;
-  margin: 0 29% 0 8%;
-  padding-right: 1%;
-  border-right: 1px solid #e5ffd4;
-}
-
-DIV.sidebar
-{
-  display: block;
-  width: 20%;
-  float: right;
-  margin-right: 8%;
-  padding-left: 1%;
-  border-left: 1px solid #e5ffd4;
-}
-*/
 
 HR
 {
@@ -55,12 +35,15 @@ A[name]
   font-size: 80%;
 }
 
-DIV#revisions A
+DIV#content A
 {
   border: none;
 }
 
-DIV#revisions H2
+/* Fake revision summaries via CVSHistory feed */
+
+DIV#revisions H2,
+DIV.cvslog2web_p_entry H1
 {
   padding: 0;
   font-size: 160%;
@@ -71,6 +54,100 @@ DIV#revisions H3
 {
   margin: 0;
   font-size: 140%;
+}
+
+/* Revision summarys by cvslog2web */
+
+DIV.cvslog2web_title
+{
+  font-size: 140%;
+  font-weight: bold;
+  margin: 0;
+}
+
+DIV.cvslog2web_title A
+{
+  border: none;
+}
+
+SPAN.cvslog2web_authors,
+DIV.cvslog2web_authors,
+DIV.cvslog2web_timestamp,
+DIV.cvslog2web_filelist,
+DIV.cvslog2web_filelist P
+{
+  display: block;
+  font-size: small;
+  font-weight: normal;
+  color: #888;
+  margin: 0;
+}
+
+div.cvslog2web_p_entry span.cvslog2web_filestatus
+{
+  margin-right: 6px;
+}
+
+SPAN.cvslog2web_authorsprefix,
+SPAN.cvslog2web_timestampprefix,
+SPAN.cvslog2web_filestatus
+{
+  font-weight: bold;
+}
+
+DIV.cvslog2web_message P
+{
+  margin: 0 0 0 20px;
+  padding: 0;
+  font-size: small;
+}
+
+SPAN.cvslog2web_authors
+{
+  margin-top: 12px;
+}
+
+DIV.cvslog2web_message,
+DIV.cvslog2web_filelist
+{
+  margin-bottom: 12px;
+}
+
+DIV.cvslog2web_credit
+{
+  text-align: right;
+  font-size: small;
+  font-style: italic;
+}
+
+DIV.cvslog2web_p_entry DIV.cvslog2web_message
+{
+  padding: 10px;
+}
+
+div.cvslog2web_nav_next,
+div.cvslog2web_nav_next_disabled,
+div.cvslog2web_nav_prev,
+div.cvslog2web_nav_prev_disabled,
+div.cvslog2web_feedlink,
+div.cvslog2web_feedlink a img
+{
+  display: inline;
+  border: none;
+  font-weight: bold;
+  text-transform: lowercase;
+  vertical-align: bottom;
+}
+
+/* Modified breadcrumb trails - RCVSweb default layout has <hr> after
+ * the "You're browsing CVS" message; breadcrumb trails by default
+ * include a similar horizontal line via border-top. Don't want two,
+ * so use a local variation on the global breadcrumbs to tidy it up.
+ */
+
+DIV.breadcrumbs_mod DIV.breadcrumbs
+{
+  border-top: none;
 }
 
 /* Forms (from Collaboa CSS file, with tweaks) */
@@ -348,3 +425,9 @@ TABLE.dir * TD.log
   font-weight: bold;
 }
 
+/* Errors */
+
+DIV#error
+{
+  margin-top: 12px;
+}
