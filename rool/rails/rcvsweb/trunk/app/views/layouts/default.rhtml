@@ -25,7 +25,7 @@
             Revisions can be listed by
             <%= link_to 'log message', { :controller => 'revisions', :action => 'list' } %> (fast) or
             <%= link_to 'revision number', { :controller => 'revisions', :action => 'revisions' } %> (slow).<br />
-            The Subversion repository is <a href="/rails/collaboa/repository/browse">here</a>.
+            The Subversion repository is <a href="/tracker/repository/browse">here</a>.
             <hr />
 
 <%= @content_for_layout %>
@@ -59,10 +59,10 @@
 
               <p />
               <ul>
-                <li><a href="/rails/collaboa/">Tickets</a></li>
-                <li><a href="/rails/collaboa/milestones">Milestones</a></li>
-                <li>Subversion: <a href="/rails/collaboa/repository/changesets">Changesets</a></li>
-                <li>Subversion: <a href="/rails/collaboa/repository/browse">Browse</a></li>
+                <li><a href="/tracker">Tickets</a></li>
+                <li><a href="/tracker/milestones">Milestones</a></li>
+                <li>Subversion: <a href="/tracker/repository/changesets">Changesets</a></li>
+                <li>Subversion: <a href="/tracker/repository/browse">Browse</a></li>
                 <li>CVS: <%= link_to 'Revisions', { :controller => 'revisions', :action => 'list' } %></li>
                 <li>CVS: <%= link_to 'Browse', { :controller => 'rcvsweb', :action => 'run' } %></li>
               </ul>
