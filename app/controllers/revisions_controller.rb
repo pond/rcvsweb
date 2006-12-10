@@ -2,18 +2,10 @@ require 'revision_parser'
 
 class RevisionsController < ApplicationController
 
-  # Synthesised revisions: CVS History feed URL
-  #
-  @@parser_url = 'http://pond.org.uk/python/cvshistory/cvshistory.cgi?revsel1=na&revsel2=na&datesel1=na&datesel2=na&selop=in&opA=on&opM=on&opR=on&opT=on&limit=1&rss=1'
-
-  # cvslog2web output directory
-  #
-  @@cvslog2web_output = '/home/adh/python/cvslog2web/public'
-
   def list
     # Use cvslog2web output directly for a list of recent changes.
 
-    render :file => "#{@@cvslog2web_output}/recent.html", :layout => 'default'
+    render :file => "#{CVSLOG2WEB_OUTPUT}/recent.html", :layout => 'default'
   end
   
   def logs
@@ -26,9 +18,7 @@ class RevisionsController < ApplicationController
     log.gsub!(/\.html$/, '')
     log.gsub!(/[\.\/\\]/, '')
 
-logger.error("FETCH FILE: #{@@cvslog2web_output}/#{log}.html");
-
-    render :file => "#{@@cvslog2web_output}/#{log}.html", :layout => 'default'
+    render :file => "#{CVSLOG2WEB_OUTPUT}/#{log}.html", :layout => 'default'
   end
   
   def revisions
@@ -38,7 +28,7 @@ logger.error("FETCH FILE: #{@@cvslog2web_output}/#{log}.html");
     # revision keys in reverse order of associated date (i.e. most
     # recent first) and iterate through the resulting sorted list.
 
-    parser    = RevisionParser.new(@@parser_url)
+    parser    = RevisionParser.new(get_parser_url())
     revisions = parser.fetch_and_parse(true)
     sort_keys = revisions.keys.sort do |key_x, key_y|
                   revisions[key_y][0][:date] <=> revisions[key_x][0][:date]
@@ -72,7 +62,7 @@ logger.error("FETCH FILE: #{@@cvslog2web_output}/#{log}.html");
     # @params hash. This is a key to a revision hash entry. Extract the relevant
     # hash and pass it to the view.
 
-    parser    = RevisionParser.new(@@parser_url)
+    parser    = RevisionParser.new(get_parser_url())
     revisions = parser.fetch_and_parse(true)
     @output   = revisions[@params[:ident]]
 
@@ -89,12 +79,30 @@ logger.error("FETCH FILE: #{@@cvslog2web_output}/#{log}.html");
     # TO DO: Move these icons to the shared pool and update Collaboa accordingly.
 
     @category_map = {
-                      'Addition' => { :image => '/rails/collaboa/images/chg-icon_A.png', :text => '(+)' },
-                      'Removal'  => { :image => '/rails/collaboa/images/chg-icon_D.png', :text => '(-)' },
-                      'Commit'   => { :image => '/rails/collaboa/images/chg-icon_M.png', :text => ''    },
-                      :unknown   => { :image => '/rails/collaboa/images/icon_file.gif',  :text => '?'   }
+                      'Addition' => { :image => '/tracker/images/chg-icon_A.png', :text => '(+)' },
+                      'Removal'  => { :image => '/tracker/images/chg-icon_D.png', :text => '(-)' },
+                      'Commit'   => { :image => '/tracker/images/chg-icon_M.png', :text => ''    },
+                      :unknown   => { :image => '/tracker/images/icon_file.gif',  :text => '?'   }
                     }
 
     render :layout => 'default'
   end
+  
+  # Synthesised revisions: return the CVS History feed URL.
+  
+  def get_parser_url
+
+    # For sites that hold a development service on usual port numbers,
+    # check to see if we're using the development HTTPS port. If so,
+    # change to the development HTTP port. Then check to see if we're
+    # on the development HTTP port; if not, change to port 80 for a
+    # regular HTTP service.
+  
+    port = request.env['SERVER_PORT']
+    port = DEVEL_HTTP_PORT if (port == DEVEL_HTTPS_PORT)
+    port = 80              if (port != DEVEL_HTTP_PORT)
+    
+    "http://#{request.env['SERVER_ADDR']}:#{port}#{CVSLOG2WEB_PREFIX}" +
+    '?revsel1=na&revsel2=na&datesel1=na&datesel2=na&selop=in&opA=on&opM=on&opR=on&opT=on&limit=1&rss=1'
+  end  
 end
