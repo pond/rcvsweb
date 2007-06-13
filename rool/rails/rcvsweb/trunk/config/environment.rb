@@ -23,7 +23,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 # is left alone, again for a normal HTTP request. Otherwise, the
 # port is reset to 80.
 
-PATH_PREFIX         = ENV['RAILS_RELATIVE_URL_ROOT']
+PATH_PREFIX         = ENV['RAILS_RELATIVE_URL_ROOT'] || ''
 CVSWEB_LOCATION     = '/home/rool/devel/perl/cvsweb/cvsweb.cgi'
 CVSHISTORY_LOCATION = '/home/rool/devel/python/cvshistory/cvshistory.cgi'
 CVSLOG2WEB_OUTPUT   = '/home/rool/devel/python/cvslog2web/public'
