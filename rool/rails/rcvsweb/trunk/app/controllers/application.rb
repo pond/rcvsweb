@@ -43,12 +43,15 @@ private
     # CGI, at least for LightTPD. Strip off the PATH_PREFIX (location
     # of the Rails application) if present.
 
-    uri = @request.env['REQUEST_URI'].dup
+    uri = @request.env['REQUEST_URI'].dup # NOT a full URI
     uri.slice!(PATH_PREFIX + '/')
 
     # Split off the query string section, if there is one.
 
     (path_info, query) = uri.split('?')
+
+    path_info = URI.decode(path_info) unless path_info.nil?
+    query     = URI.decode(query)     unless query.nil?
 
     # The CGI script expects certain variables to be set up in a
     # certain way. "Slow" CGI does this but FastCGI does not because
