@@ -10,7 +10,7 @@ dbinfo: &dbinfo
   adapter: postgresql
   host: /home/rool/postgres/
   username: rool
-  password: oiarfewa
+  password: set-password-here
   
 development:
   <<: *dbinfo

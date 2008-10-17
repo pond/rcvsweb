@@ -4,7 +4,12 @@
  * Based on the FreeBSD-CVSweb default stylesheet.
  */
 
-DIV#content > H1
+.template_body_content table table
+{
+  table-layout: auto !important;
+}
+
+div#content > h1
 {
   margin: 0;
   padding: 5px;
@@ -12,22 +17,23 @@ DIV#content > H1
   border: 1px solid #333;
   color: #9a9a9a;
   background: #ffe;
+  overflow: auto;
 }
 
-DIV#content H3
+div#content h3
 {
   margin: 12px 0;
 }
 
-HR
+hr
 {
   height: 1px;
   border: none;
-  background-color: #e5ffd4;
+  background-color: #c4ccd8;
   padding: 0;
 }
 
-A[name]
+a[name]
 {
   text-decoration: none;
   color: #000;
@@ -35,22 +41,22 @@ A[name]
   font-size: 80%;
 }
 
-DIV#content A
+div#content a
 {
   border: none;
 }
 
 /* Fake revision summaries via CVSHistory feed */
 
-DIV#revisions H2,
-DIV.cvslog2web_p_entry H1
+div#revisions h2,
+div.cvslog2web_p_entry h1
 {
   padding: 0;
   font-size: 160%;
   margin-bottom: 10px;
 }
 
-DIV#revisions H3
+div#revisions h3
 {
   margin: 0;
   font-size: 140%;
@@ -58,23 +64,23 @@ DIV#revisions H3
 
 /* Revision summarys by cvslog2web */
 
-DIV.cvslog2web_title
+div.cvslog2web_title
 {
   font-size: 140%;
   font-weight: bold;
   margin: 0;
 }
 
-DIV.cvslog2web_title A
+div.cvslog2web_title a
 {
   border: none;
 }
 
-SPAN.cvslog2web_authors,
-DIV.cvslog2web_authors,
-DIV.cvslog2web_timestamp,
-DIV.cvslog2web_filelist,
-DIV.cvslog2web_filelist P
+span.cvslog2web_authors,
+div.cvslog2web_authors,
+div.cvslog2web_timestamp,
+div.cvslog2web_filelist,
+div.cvslog2web_filelist p
 {
   display: block;
   font-size: small;
@@ -88,39 +94,39 @@ div.cvslog2web_p_entry span.cvslog2web_filestatus
   margin-right: 6px;
 }
 
-SPAN.cvslog2web_authorsprefix,
-SPAN.cvslog2web_timestampprefix,
-SPAN.cvslog2web_filestatus
+span.cvslog2web_authorsprefix,
+span.cvslog2web_timestampprefix,
+span.cvslog2web_filestatus
 {
   font-weight: bold;
 }
 
-DIV.cvslog2web_message P
+div.cvslog2web_message p
 {
   margin: 0 0 0 20px;
   padding: 0;
   font-size: small;
 }
 
-SPAN.cvslog2web_authors
+span.cvslog2web_authors
 {
   margin-top: 12px;
 }
 
-DIV.cvslog2web_message,
-DIV.cvslog2web_filelist
+div.cvslog2web_message,
+div.cvslog2web_filelist
 {
   margin-bottom: 12px;
 }
 
-DIV.cvslog2web_credit
+div.cvslog2web_credit
 {
   text-align: right;
   font-size: small;
   font-style: italic;
 }
 
-DIV.cvslog2web_p_entry DIV.cvslog2web_message
+div.cvslog2web_p_entry div.cvslog2web_message
 {
   padding: 10px;
 }
@@ -145,14 +151,14 @@ div.cvslog2web_feedlink a img
  * so use a local variation on the global breadcrumbs to tidy it up.
  */
 
-DIV.breadcrumbs_mod DIV.breadcrumbs
+div.breadcrumbs_mod div.breadcrumbs
 {
   border-top: none;
 }
 
 /* Forms (from Collaboa CSS file, with tweaks) */
 
-FIELDSET
+fieldset
 {
   display: block;
   margin: 10px 0 10px 0;
@@ -160,30 +166,30 @@ FIELDSET
   background: #f6f6f6;
 }
 
-FIELDSET LEGEND
+fieldset legend
 {
   padding: 2px 10px 2px 10px;
   border: 1px solid #ccc;
   background: #fff;
 }
 
-LEGEND
+legend
 {
   font-weight: bold;
   font-size: 80%;
 }
 
-LABEL
+label
 {
   font-size: 80%;
 }
 
-LABEL.first
+label.first
 {
   padding-top: 10px;
 }
 
-FIELDSET BR
+fieldset br
 {
   display: block;
 }
@@ -205,12 +211,6 @@ FIELDSET BR
   font-weight: normal;
 }
 
-PRE
-{
-  font-size: 90%;
-  overflow: auto;
-}
-
 /* Navigation header for source views, diffs and annotations */
 
 .navigate-header
@@ -222,26 +222,26 @@ PRE
 
 /* Directory listing */
 
-TABLE.dir
+table.dir
 {
   font-size: 80%;
 }
 
-TABLE.dir TD A
+table.dir td a
 {
   border: none;
 }
 
 /* Cells */
 
-TABLE.dir * TD {
+table.dir * td {
   padding-left: 5px;
   padding-right: 5px;
 }
 
 /* Column headers */
 
-TABLE.dir * TH
+table.dir * th
 {
   background-color: #ddd;
   padding-left: 5px;
@@ -250,7 +250,7 @@ TABLE.dir * TH
 
 /* Sorted column header */
 
-TABLE.dir * TH.sorted
+table.dir * th.sorted
 {
   background-image: url("/tracker/images/sort_desc.png");
   background-repeat: no-repeat;
@@ -261,28 +261,28 @@ TABLE.dir * TH.sorted
 
 /* Even rows */
 
-TABLE.dir * TR.even
+table.dir * tr.even
 {
   background-color: #fbfbfb;
 }
 
 /* Odd rows */
 
-TABLE.dir * TR.odd
+table.dir * tr.odd
 {
   background-color: #f1f1f1;
 }
 
 /* File and dir name columns */
 
-TABLE.dir * TD.file, TABLE.dir * TD.dir
+table.dir * td.file, table.dir * td.dir
 {
   white-space: nowrap;
 }
 
 /* Graph link column */
 
-TABLE.dir * TD.graph
+table.dir * td.graph
 {
   padding-left: 3px;
   padding-right: 3px;
@@ -292,20 +292,20 @@ TABLE.dir * TD.graph
 
 /* Age column */
 
-TABLE.dir * TD.age
+table.dir * td.age
 {
   font-style: italic;
   white-space: nowrap;
 }
 
-TABLE.dir * TD.author
+table.dir * td.author
 {
   white-space: nowrap;
 }
 
 /* Log entry column */
 
-TABLE.dir * TD.log
+table.dir * td.log
 {
   font-size: smaller;
 }
@@ -427,7 +427,7 @@ TABLE.dir * TD.log
 
 /* Errors */
 
-DIV#error
+div#error
 {
   margin-top: 12px;
 }
