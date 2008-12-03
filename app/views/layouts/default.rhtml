@@ -41,15 +41,16 @@
         <td width="24%">
           <div class="template_sidebar">
             <div class="template_sidebar_node">
-              <h3>Search for CVS module</h3>
+              <h3>Search whole site</h3>
 
               <p />
-              <div class="template_sidebar_static">
-                <%= form_tag( {}, :method => 'get') %>
-                  <input type="text" id="mpath" name="path" value="" size="15" />
-                  <input type="submit" value="Go" />
-                <%= end_form_tag %>
-              </div>
+              <form action="http://www.google.com/search" method="get" class="searchform">
+                <input type="hidden" name="num"           value="10" />
+                <input type="hidden" name="hl"            value="en" />
+                <input type="hidden" name="as_sitesearch" value="www.riscosopen.org" />
+                <input type="text" value="" maxlength="256" size="15" name="q" id="q" />
+                <b><input type="submit" value="Go" name="btnG" /></b>
+              </form>
             </div>
 
 <%= render 'shared/fixed_sidebar' %>
