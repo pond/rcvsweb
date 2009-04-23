@@ -124,9 +124,9 @@ private
 
       # There are indeed some headers. Create a hash from them.
 
-      headstr.downcase.split(short ? "\n" : "\r\n").each do |str|
+      headstr.split(short ? "\n" : "\r\n").each do |str|
         pos = str.index(':')
-        headers[str.slice!(0..pos - 1).strip] = str[1..-1].strip if (pos > 1)
+        headers[str.slice!(0..pos - 1).strip.downcase] = str[1..-1].strip if (pos > 1)
       end
 
       # If we find a Status header with a 300-series code, check for a
