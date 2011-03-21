@@ -16,6 +16,8 @@
 
 class ApplicationController < ActionController::Base
 
+  require 'iconv'
+
   # Hub single sign-on support.
 
   require 'hub_sso_lib'
@@ -40,11 +42,11 @@ private
 
   def capture_script_output(script_location, extra_prefix)
     # Get the request URI in a way that works for FCGI and regular
-    # CGI, at least for LightTPD. Strip off the PATH_PREFIX (location
-    # of the Rails application) if present.
+    # CGI, at least for LightTPD. Strip off the root path prefix
+    # (location of the Rails application) if present.
 
     uri = @request.env['REQUEST_URI'].dup # NOT a full URI
-    uri.slice!(PATH_PREFIX + '/')
+    uri.slice!(root_path())
 
     # Split off the query string section, if there is one.
 
@@ -76,7 +78,7 @@ private
 
       case key
         when 'SCRIPT_NAME'
-          value = PATH_PREFIX + extra_prefix
+          value = root_path().chop + extra_prefix
         when 'SCRIPT_FILENAME'
           value = "#{RAILS_ROOT}/public/dispatch.cgi"
         when 'PATH_INFO'
@@ -96,10 +98,11 @@ private
     end # From needed.each
 
     # Add the CVSweb command to the command string and execute it.
-    # Return the output of the command.
+    # Return the output of the command; assume Latin-1 and convert
+    # to UTF-8 in passing.
 
     command += "#{script_location}"
-    return `#{command}`
+    return Iconv.conv("UTF8", "ISO-8859-1", `#{command}`)
   end
 
   # Parse script output - pass the raw output data from the script and a
