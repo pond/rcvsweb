@@ -41,7 +41,7 @@
 -%>
             <img alt="<%= file[:category] %>" title="<%= file[:category] %>" src="<%= imgsrc %>" />
 <% if file[:category] != 'Removal' -%>
-            <a href="<%= "#{PATH_PREFIX}/view/#{file[:path]}" %>"><%= file[:path] %></a>
+            <a href="<%= url_for(:controller=>'rcvsweb', :action=>'run', :url=>file[:path], :only_path => true) %>"><%= file[:path] %></a>
 <% else -%>
             <%= file[:path] %>
 <% end -%>
