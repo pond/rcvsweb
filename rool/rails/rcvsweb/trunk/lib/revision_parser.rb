@@ -1,4 +1,6 @@
 require 'strscan'
+require 'uri'
+require 'net/https'
 require 'rss'
 
 class RevisionDetails
@@ -65,8 +67,30 @@ class RevisionParser
   #
   def fetch_and_parse(extract_logs = false)
 
+    # Site-specific issue: At ROOL, the SSL certificate issuer uses
+    # a certificate chain which isn't known about by Ruby initially.
+    # This causes SLL failures if we were to just try and get the
+    # RSS parser to fetch & parse the data by passing it "@feed" in
+    # "RSS::Parser.parse()". Instead we have to manually do the SSL
+    # foot work and pass the parser the fetched data.
+
+    uri                = URI.parse( @feed )
+    https              = Net::HTTP.new( uri.host, uri.port )
+    https.use_ssl      = true
+    https.verify_mode  = OpenSSL::SSL::VERIFY_PEER
+    https.ca_file      = SSL_CERT_CHAIN unless ( SSL_CERT_CHAIN.nil? || SSL_CERT_CHAIN.empty? )
+
+    feed_data = https.start do | http |
+      request  = Net::HTTP::Get.new( uri.request_uri )
+      response = https.request( request )
+
+      raise "#{ response.code }: #{ response.messages }" unless ( response.code.to_i >= 200 && response.code.to_i <= 299 )
+
+      response.body
+    end
+
     revisions = {}
-    rss       = RSS::Parser.parse(@feed)
+    rss       = RSS::Parser.parse( feed_data )
 
     rss.items.each do |item|
       # Description format:

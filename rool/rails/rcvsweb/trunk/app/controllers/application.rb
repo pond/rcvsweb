@@ -42,7 +42,7 @@ private
 
   def capture_script_output(script_location, extra_prefix)
     # Get the request URI in a way that works for FCGI and regular
-    # CGI, at least for LightTPD. Strip off the root path prefix
+    # CGI, at least for LigHTTPd. Strip off the root path prefix
     # (location of the Rails application) if present.
 
     uri = @request.env['REQUEST_URI'].dup # NOT a full URI
@@ -102,7 +102,40 @@ private
     # to UTF-8 in passing.
 
     command += "#{script_location}"
-    return Iconv.conv("UTF8", "ISO-8859-1", `#{command}`)
+    data     = `#{command}`
+
+    # I searched for nearly two hours through endless documentation about
+    # a ridiculous number of classes and methods related to HTTP, but not
+    # one single thing just took a string and parsed it as an HTTP response,
+    # or even just parsed HTTP headers.
+    #
+    # There may be a way but I gave up in the face of poor documentation and
+    # an excess of often obtuse different ways of doing the same thing over
+    # and over, with nothing providing the simple function I wanted. There's
+    # a gem that does it, but I don't want extra dependencies - all the HTTP
+    # header parsing code is all there, it's just locked away behind a
+    # labyrinth of similar named classes and dodgy APIs.
+    #
+    # All I want is the content type, but reliably!
+    #
+    # Thus, unreliable hack is forced.
+
+    headers = data.split("\r\n\r\n", 2).first || ''
+    headers = headers.downcase.split("\r\n")  || [] # Don't care about multiline headers here
+    parsed  = {}
+
+    headers.each do | header |
+      (key, value) = header.split(':', 2)
+      parsed[key] = value.strip
+    end
+
+    type = parsed['content-type']
+
+    if ( ! type.nil? && type[0..4] == 'text/' )
+      return Iconv.conv("UTF8", "ISO-8859-1", data)
+    else
+      return data
+    end
   end
 
   # Parse script output - pass the raw output data from the script and a

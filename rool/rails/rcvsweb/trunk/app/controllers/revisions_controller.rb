@@ -7,7 +7,7 @@ class RevisionsController < ApplicationController
 
     render :file => "#{CVSLOG2WEB_OUTPUT}/recent.html", :layout => 'default'
   end
-  
+
   def logs
     # Use cvslog2web output directly for log details of a specific change.
     # Links are based off an 'ident' parameter pulled in via a query string;
@@ -20,7 +20,7 @@ class RevisionsController < ApplicationController
 
     render :file => "#{CVSLOG2WEB_OUTPUT}/#{log}.html", :layout => 'default'
   end
-  
+
   def revisions
     # Create a revision parser for a CVSHistory RSS feed. Get a
     # hash keyed by revision number (as a string), each entry
@@ -87,22 +87,22 @@ class RevisionsController < ApplicationController
 
     render :layout => 'default'
   end
-  
+
   # Synthesised revisions: return the CVS History feed URL.
-  
+
   def get_parser_url
 
     # For sites that hold a development service on usual port numbers,
-    # check to see if we're using the development HTTPS port. If so,
-    # change to the development HTTP port. Then check to see if we're
-    # on the development HTTP port; if not, change to port 80 for a
-    # regular HTTP service.
-  
+    # check to see if we're using the development HTTP port. If so,
+    # change to the development HTTPS port. Then check to see if we're
+    # on the development HTTPS port; if not, change to port 443 for a
+    # regular HTTPS service.
+
     port = request.env['SERVER_PORT']
-    port = DEVEL_HTTP_PORT if (port == DEVEL_HTTPS_PORT)
-    port = 80              if (port != DEVEL_HTTP_PORT)
-    
-    "http://#{request.env['SERVER_ADDR']}:#{port}#{CVSLOG2WEB_PREFIX}" +
+    port = DEVEL_HTTPS_PORT if (port == DEVEL_HTTP_PORT)
+    port = 443              if (port != DEVEL_HTTPS_PORT)
+
+    "https://#{request.host}:#{port}#{CVSLOG2WEB_PREFIX}" +
     '?revsel1=na&revsel2=na&datesel1=na&datesel2=na&selop=in&opA=on&opM=on&opR=on&opT=on&limit=1&rss=1'
-  end  
+  end
 end
