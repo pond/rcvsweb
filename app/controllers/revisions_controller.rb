@@ -18,7 +18,13 @@ class RevisionsController < ApplicationController
     log.gsub!(/\.html$/, '')
     log.gsub!(/[\.\/\\]/, '')
 
-    render :file => "#{CVSLOG2WEB_OUTPUT}/#{log}.html", :layout => 'default'
+    filename = "#{CVSLOG2WEB_OUTPUT}/#{log}.html"
+
+    if File.file?(filename)
+      render :file => filename, :layout => 'default'
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   def revisions
