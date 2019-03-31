@@ -94,8 +94,10 @@ class RevisionsController < ApplicationController
     render :layout => 'default'
   end
 
-  # Synthesised revisions: return the CVS History feed URL.
+private
 
+  # Synthesised revisions: return the CVS History feed URL.
+  #
   def get_parser_url
 
     # For sites that hold a development service on usual port numbers,

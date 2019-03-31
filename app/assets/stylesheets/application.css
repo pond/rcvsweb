@@ -1,0 +1,449 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/* RISC OS Open FreeBSD-CVSweb stylesheet for RCVSweb
+ * wrapper application.
+ *
+ * Based on the FreeBSD-CVSweb default stylesheet.
+ */
+
+.template_body_content table table
+{
+  table-layout: auto !important;
+}
+
+div#content > h1
+{
+  margin: 0;
+  padding: 5px;
+  font-size: 150%;
+  border: 1px solid #333;
+  color: #9a9a9a;
+  background: #ffe;
+  overflow: auto;
+}
+
+div#content h3
+{
+  margin: 12px 0;
+}
+
+hr
+{
+  height: 1px;
+  border: none;
+  background-color: #c4ccd8;
+  padding: 0;
+}
+
+a[name]
+{
+  text-decoration: none;
+  color: #000;
+  border: none;
+  font-size: 80%;
+}
+
+div#content a
+{
+  border: none;
+}
+
+/* Fake revision summaries via CVSHistory feed */
+
+div#revisions h2,
+div.cvslog2web_p_entry h1
+{
+  padding: 0;
+  font-size: 160%;
+  margin-bottom: 10px;
+}
+
+div#revisions h3
+{
+  margin: 0;
+  font-size: 140%;
+}
+
+/* Revision summarys by cvslog2web */
+
+div.cvslog2web_title
+{
+  font-size: 140%;
+  font-weight: bold;
+  margin: 0;
+}
+
+div.cvslog2web_title a
+{
+  border: none;
+}
+
+span.cvslog2web_authors,
+div.cvslog2web_authors,
+div.cvslog2web_timestamp,
+div.cvslog2web_filelist,
+div.cvslog2web_filelist p
+{
+  display: block;
+  font-size: small;
+  font-weight: normal;
+  color: #888;
+  margin: 0;
+}
+
+div.cvslog2web_p_entry span.cvslog2web_filestatus
+{
+  margin-right: 6px;
+}
+
+span.cvslog2web_authorsprefix,
+span.cvslog2web_timestampprefix,
+span.cvslog2web_filestatus
+{
+  font-weight: bold;
+}
+
+div.cvslog2web_message p
+{
+  margin: 0 0 0 20px;
+  padding: 0;
+  font-size: small;
+}
+
+span.cvslog2web_authors
+{
+  margin-top: 12px;
+}
+
+div.cvslog2web_message,
+div.cvslog2web_filelist
+{
+  margin-bottom: 12px;
+}
+
+div.cvslog2web_credit
+{
+  text-align: right;
+  font-size: small;
+  font-style: italic;
+}
+
+div.cvslog2web_p_entry div.cvslog2web_message
+{
+  padding: 10px;
+}
+
+div.cvslog2web_nav_next,
+div.cvslog2web_nav_next_disabled,
+div.cvslog2web_nav_prev,
+div.cvslog2web_nav_prev_disabled,
+div.cvslog2web_feedlink,
+div.cvslog2web_feedlink a img
+{
+  display: inline;
+  border: none;
+  font-weight: bold;
+  text-transform: lowercase;
+  vertical-align: bottom;
+}
+
+/* Modified breadcrumb trails - RCVSweb default layout has <hr> after
+ * the "You're browsing CVS" message; breadcrumb trails by default
+ * include a similar horizontal line via border-top. Don't want two,
+ * so use a local variation on the global breadcrumbs to tidy it up.
+ */
+
+div.breadcrumbs_mod div.breadcrumbs
+{
+  border-top: none;
+}
+
+/* Forms (from Collaboa CSS file, with tweaks) */
+
+fieldset
+{
+  display: block;
+  margin: 10px 0 10px 0;
+  border: 1px solid #ccc;
+  background: #f6f6f6;
+}
+
+fieldset legend
+{
+  padding: 2px 10px 2px 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+legend
+{
+  font-weight: bold;
+  font-size: 80%;
+}
+
+label
+{
+  font-size: 80%;
+}
+
+label.first
+{
+  padding-top: 10px;
+}
+
+fieldset br
+{
+  display: block;
+}
+
+/* Generic nowrap class */
+
+.nowrap
+{
+  white-space: nowrap;
+}
+
+/* Source, diff and annotate views */
+
+.src
+{
+  color: #000;
+  background-color: #eee;
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* Navigation header for source views, diffs and annotations */
+
+.navigate-header
+{
+  background-color: #eee;
+  padding: 2px;
+  font-size: 80%;
+}
+
+/* Directory listing */
+
+table.dir
+{
+  font-size: 80%;
+}
+
+table.dir td a
+{
+  border: none;
+}
+
+/* Cells */
+
+table.dir * td {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* Column headers */
+
+table.dir * th
+{
+  background-color: #ddd;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* Sorted column header */
+
+table.dir * th.sorted
+{
+  background-image: url("/tracker/images/sort_desc.png");
+  background-repeat: no-repeat;
+  padding-right: 12px;
+  background-position: 99% 50%;
+  background-color: #ddd;
+}
+
+/* Even rows */
+
+table.dir * tr.even
+{
+  background-color: #fbfbfb;
+}
+
+/* Odd rows */
+
+table.dir * tr.odd
+{
+  background-color: #f1f1f1;
+}
+
+/* File and dir name columns */
+
+table.dir * td.file, table.dir * td.dir
+{
+  white-space: nowrap;
+}
+
+/* Graph link column */
+
+table.dir * td.graph
+{
+  padding-left: 3px;
+  padding-right: 3px;
+  text-align: center;
+  width: 1%;
+}
+
+/* Age column */
+
+table.dir * td.age
+{
+  font-style: italic;
+  white-space: nowrap;
+}
+
+table.dir * td.author
+{
+  white-space: nowrap;
+}
+
+/* Log entry column */
+
+table.dir * td.log
+{
+  font-size: smaller;
+}
+
+/* Attic toggles in directory view */
+
+.attic
+{
+  font-size: smaller;
+}
+
+/* Option table labels and values */
+
+.opt-label
+{
+  text-align: right;
+  padding-left: 0.5em;
+}
+
+.opt-value
+{
+  padding-right: 0.5em;
+}
+
+/* Log entry in markup */
+
+.log-markup
+{
+  background-color: #fff;
+  width: 100%;
+}
+
+/* Diff-selected revision in log */
+
+.diff-selected {
+  padding-right: 0.5em;
+  border-right: 10px solid #fc6;
+}
+
+/* 'Line'-header of each diffed file */
+
+.diff-heading
+{
+  background-color: #9cc;
+  border: 2px outset;
+  padding: 5px;
+}
+
+/* Common properties for diff "contents" */
+
+.diff
+{
+  font-family: sans-serif;
+  font-size: smaller;
+}
+
+/* Lines that are the same */
+
+.diff-same
+{
+  background-color: inherit;
+}
+
+/* Empty lines */
+
+.diff-empty
+{
+  background-color: #ccc;
+}
+
+/* Added lines */
+
+.diff-added
+{
+  background-color: #9f9;
+}
+
+/* Removed lines */
+
+.diff-removed
+{
+  background-color: #f99;
+}
+
+/* Changed lines */
+
+.diff-changed
+{
+  background-color: #ff6;
+}
+
+/* Empty changed lines */
+
+.diff-changed-missing
+{
+  background-color: #ee6;
+}
+
+/* Unchanged text in ediffs */
+
+.diff-unchanged
+{
+  background-color: #ccc;
+}
+
+/* Current revision lines in annotate view */
+
+.current-rev
+{
+  font-weight: bold;
+}
+
+/* Download links */
+
+.download-link
+{
+  font-weight: bold;
+}
+
+/* Errors */
+
+div#error
+{
+  margin-top: 12px;
+}
