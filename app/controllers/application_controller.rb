@@ -176,7 +176,7 @@ private
 
         # Render the default layout to send the template-based output.
 
-        render :layout => 'default'
+        render :layout => 'application'
 
       else
 

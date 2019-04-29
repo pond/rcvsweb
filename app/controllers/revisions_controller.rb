@@ -5,7 +5,7 @@ class RevisionsController < ApplicationController
   def list
     # Use cvslog2web output directly for a list of recent changes.
 
-    render :file => "#{CVSLOG2WEB_OUTPUT}/recent.html", :layout => 'default'
+    render :file => "#{CVSLOG2WEB_OUTPUT}/recent.html", :layout => 'application'
   end
 
   def logs
@@ -21,7 +21,7 @@ class RevisionsController < ApplicationController
     filename = "#{CVSLOG2WEB_OUTPUT}/#{log}.html"
 
     if File.file?(filename)
-      render :file => filename, :layout => 'default'
+      render :file => filename, :layout => 'application'
     else
       raise ActionController::RoutingError.new('Not Found')
     end
@@ -60,7 +60,7 @@ class RevisionsController < ApplicationController
 
     # Render the default layout to create the revision list.
 
-    render :layout => 'default'
+    render :layout => 'application'
   end
 
   def show
@@ -91,7 +91,7 @@ class RevisionsController < ApplicationController
                       :unknown   => { :image => '/tracker/images/icon_file.gif',  :text => '?'   }
                     }
 
-    render :layout => 'default'
+    render :layout => 'application'
   end
 
 private
