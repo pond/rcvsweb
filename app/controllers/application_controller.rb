@@ -49,9 +49,7 @@ private
         when 'SCRIPT_FILENAME'
           value = "#{Rails.root}/public/dispatch.cgi"
         when 'PATH_INFO'
-          value = uri.path
-          value = '/' + value unless (value[0] == '/')
-          value = value[extra_prefix.length..-1] if (value[0..(extra_prefix.length - 1)] == extra_prefix)
+          value = params[:url]
         when 'QUERY_STRING'
           value = uri.query
         else
@@ -87,7 +85,8 @@ private
     #
     # Thus, unreliable hack is forced.
 
-    headers = data.split("\r\n\r\n", 2).first || ''
+    headers = data.encode("UTF-8", "ISO-8859-1", :invalid => :replace, :undef => :replace)
+    headers = headers.split("\r\n\r\n", 2).first || ''
     headers = headers.downcase.split("\r\n")  || [] # Don't care about multiline headers here
     parsed  = {}
 
@@ -175,6 +174,9 @@ private
         @output.slice!(body_pos..-1) if body_pos
 
         # Render the default layout to send the template-based output.
+
+        @title  =  @title.html_safe()
+        @output = @output.html_safe()
 
         render :layout => 'application'
 
