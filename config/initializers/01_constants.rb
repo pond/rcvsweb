@@ -19,9 +19,9 @@
 # string if you want no such chain specifying.
 #
 PATH_PREFIX         = '/viewer'
-CVSWEB_LOCATION     = '/home/rool/devel/perl/cvsweb/cvsweb.cgi'
-CVSHISTORY_LOCATION = '/home/rool/devel/python/cvshistory/cvshistory.cgi'
-CVSLOG2WEB_OUTPUT   = '/home/rool/devel/python/cvslog2web/public'
+CVSWEB_LOCATION     = File.join(ENV[ 'HOME' ], 'devel/perl/cvsweb/cvsweb.cgi')
+CVSHISTORY_LOCATION = File.join(ENV[ 'HOME' ], '/devel/python/cvshistory/cvshistory.cgi')
+CVSLOG2WEB_OUTPUT   = File.join(ENV[ 'HOME' ], '/devel/python/cvslog2web/public')
 CVSLOG2WEB_PREFIX   = '/python/cvshistory/cvshistory.cgi'
 DEVEL_HTTP_PORT     = '25080'
 DEVEL_HTTPS_PORT    = '25081'
