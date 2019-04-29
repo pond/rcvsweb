@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
 
   require 'hub_sso_lib'
   include HubSsoLib::Core
-  before_action :hubssolib_beforehand
-  after_action :hubssolib_afterwards
+  # before_action :hubssolib_beforehand
+  # after_action :hubssolib_afterwards
 
   # The root URL action.
   #
