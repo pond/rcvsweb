@@ -65,12 +65,12 @@ class RevisionsController < ApplicationController
 
   def show
     # The 'list' action creates links that create a parameter 'ident' in the
-    # @params hash. This is a key to a revision hash entry. Extract the relevant
+    # params hash. This is a key to a revision hash entry. Extract the relevant
     # hash and pass it to the view.
 
     parser    = RevisionParser.new(get_parser_url())
     revisions = parser.fetch_and_parse(true)
-    @output   = revisions[@params[:ident]]
+    @output   = revisions[params[:ident]]
 
     # Sort the array of revised files by category of action then by path.
 
