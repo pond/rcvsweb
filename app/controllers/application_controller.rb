@@ -42,18 +42,30 @@ private
 
       # Override certain items where we know we want a particular
       # result, else use a server-set value if there is one.
-
+      #
       case key
         when 'SCRIPT_NAME'
           value = root_path().chop + extra_prefix
+
         when 'SCRIPT_FILENAME'
           value = "#{Rails.root}/public/dispatch.cgi"
+
         when 'PATH_INFO'
-          value = params[:url]
+          value = params[:url] || ''
+
+          # Rails' glob route does *not* convey a trailing "/" if
+          # present in the request via the params, but it's vital
+          # for us else CVSWeb will put us into a redirection loop.
+          # In "request.url" it's already stripped, so use "env".
+          #
+          value += "/" if (request.env["REQUEST_URI"].end_with?("/") and !value.end_with?("/"))
+
         when 'QUERY_STRING'
           value = uri.query
+
         else
           value = request.env[key] || ''
+
       end
 
       # Add the variable initialisation statement to the command string.
@@ -138,7 +150,7 @@ private
         code = headers['status'].to_i
 
         if (code >= 300 and code < 400 and headers['location'])
-          redirect_to headers['location']
+          redirect_to "/" + headers['location']
           return
         end
       end
