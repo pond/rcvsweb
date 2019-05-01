@@ -27,13 +27,5 @@ module Rcvsweb
 
     config.load_defaults 5.2
 
-    # Allow multiple Rails applications by giving the session cookie a
-    # unique prefix. In this application the ApplicationController class
-    # turns sessions off (at the time of writing, 22-Aug-2006) anyway,
-    # but in future sessions may be used again in which case the line
-    # below will be important.
-    #
-    config.session_store :cookie_store, key: 'rcvswebapp_session_id'
-
   end
 end
