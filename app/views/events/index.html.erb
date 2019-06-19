@@ -1,0 +1,43 @@
+<% content_for :you_are_currently_browsing do -%>
+You are currently viewing <a href="https://gitlab.riscosopen.org/RiscOS">the GitLab server</a> activity.
+<% end -%>
+
+<div class="cvslog2web_index">
+<% @events.each do | event | -%>
+  <div class="cvslog2web_h_entry">
+    <div class="cvslog2web_title">
+      <a href="<%= event['action_url']%>">
+        <span class="cvslog2web_message">
+          <%= event['summary'] %>
+        </span>
+      </a>
+      <span class="cvslog2web_authors">
+        <span class="cvslog2web_authorsprefix">Author:</span>
+        <%= event['author'] %>
+      </span>
+    </div>
+    <div class="cvslog2web_timestamp">
+      <span class="cvslog2web_timestampprefix">Date:</span>
+      <%= (Time.parse(event['date'].in_time_zone(Time.zone).to_s) rescue 'Unknown') %>
+    </div>
+    <div class="cvslog2web_filelist">
+      <p>
+        <span class="cvslog2web_filestatus">Modified:</span>
+        <a href="<%= event['project_url'] %>">
+          <%= event['project'] %>
+        </a>
+      </p>
+    </div>
+    <div class="cvslog2web_message">
+      <p>
+          <%= event['action'].capitalize %> <%= event['target_prefix'] %>
+          <a href="<%= event['target_url'] %>">
+            <%= event['target'] %>
+          </a>
+      </p>
+      <br />
+      <%= apphelp_wrappable_pre(event['details']) %>
+    </div>
+  </div>
+<% end -%>
+</div>

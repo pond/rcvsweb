@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   get 'revisions',         to: 'revisions#list'
   get 'revisions/:action', controller: 'revisions'
 
+  get 'events', to: 'events#index'
+
 end

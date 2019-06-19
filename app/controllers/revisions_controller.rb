@@ -28,6 +28,8 @@ class RevisionsController < ApplicationController
   end
 
   def revisions
+    @title = "Revisions"
+
     # Create a revision parser for a CVSHistory RSS feed. Get a
     # hash keyed by revision number (as a string), each entry
     # containing an array of RevisionDetails objects. Sort the
@@ -64,6 +66,8 @@ class RevisionsController < ApplicationController
   end
 
   def show
+    @title = "Revision details"
+
     # The 'list' action creates links that create a parameter 'ident' in the
     # params hash. This is a key to a revision hash entry. Extract the relevant
     # hash and pass it to the view.

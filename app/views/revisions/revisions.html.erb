@@ -1,3 +1,10 @@
+<% content_for :you_are_currently_browsing do -%>
+You are currently browsing the historic <b>CVS</b> repository, which is no longer updated.<br />
+Revisions can be listed by
+<%= link_to 'log message', { :controller => 'revisions', :action => 'list' } %> (fast) or
+<%= link_to 'revision number', { :controller => 'revisions', :action => 'revisions' } %> (slow).<br />
+The GitLab server is <a href="https://gitlab.riscosopen.org/RiscOS">here</a>.
+<% end -%>
 
       <div id="revisions">
 <% @output.each do |item| -%>

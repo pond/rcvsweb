@@ -18,11 +18,12 @@
 # via an environment variable if you wish. Use 'nil' or an empty
 # string if you want no such chain specifying.
 #
-PATH_PREFIX         = '/viewer'
-CVSWEB_LOCATION     = File.join(ENV[ 'HOME' ], 'devel/perl/cvsweb/cvsweb.cgi')
-CVSHISTORY_LOCATION = File.join(ENV[ 'HOME' ], '/devel/python/cvshistory/cvshistory.cgi')
-CVSLOG2WEB_OUTPUT   = File.join(ENV[ 'HOME' ], '/devel/python/cvslog2web/public')
-CVSLOG2WEB_PREFIX   = '/python/cvshistory/cvshistory.cgi'
-DEVEL_HTTP_PORT     = '25080'
-DEVEL_HTTPS_PORT    = '25081'
-SSL_CERT_CHAIN      = ENV[ 'SSL_CERT_CHAIN' ]
+PATH_PREFIX          = '/viewer'
+CVSWEB_LOCATION      = File.expand_path('~/devel/perl/cvsweb/cvsweb.cgi')
+CVSHISTORY_LOCATION  = File.expand_path('~/devel/python/cvshistory/cvshistory.cgi')
+CVSLOG2WEB_OUTPUT    = File.expand_path('~/devel/python/cvslog2web/public')
+CVSLOG2WEB_PREFIX    = '/python/cvshistory/cvshistory.cgi'
+GITLAB_JSON_LOCATION = File.expand_path('~/devel/www/objects/gitlab/gitlab_recent.json')
+DEVEL_HTTP_PORT      = '25080'
+DEVEL_HTTPS_PORT     = '25081'
+SSL_CERT_CHAIN       = ENV[ 'SSL_CERT_CHAIN' ]
