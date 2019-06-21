@@ -1,3 +1,5 @@
+require 'json'
+
 class EventsController < ApplicationController
 
   @@last_file_datetime = nil

@@ -18,7 +18,7 @@ You are currently viewing <a href="https://gitlab.riscosopen.org/RiscOS">the Git
     </div>
     <div class="cvslog2web_timestamp">
       <span class="cvslog2web_timestampprefix">Date:</span>
-      <%= (Time.parse(event['date'].in_time_zone(Time.zone).to_s) rescue 'Unknown') %>
+      <%= (Time.parse(event['date']).in_time_zone(Time.zone).to_s rescue 'Unknown') %>
     </div>
     <div class="cvslog2web_filelist">
       <p>

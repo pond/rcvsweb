@@ -33,6 +33,10 @@ module ApplicationHelper
     simple_format(text).gsub(/([Tt]icket *#*)([0-9]*)/, '<a href="/tracker/tickets/\2">\1\2</a>').html_safe()
   end
 
+  # Return a sort of "wrappable <pre>" block of text as a paragraph with individual
+  # lines wrapped by <code>...</code>, and leading non-breaking spaces for any
+  # indenting spaces at the start of lines (but not thereafter).
+  #
   def apphelp_wrappable_pre(text)
     return tag.p() do
       text.each_line do | line |
@@ -41,7 +45,7 @@ module ApplicationHelper
           '&nbsp;' * match.length
         end
 
-        concat( tag.code() { line.html_safe } )
+        concat( tag.code() { line.strip.html_safe } )
         concat( tag.br() )
       end
     end
