@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.3'
-
 gem 'duktape'
 gem 'tzinfo-data'
 gem 'hubssolib', '~> 1.0.0', :require => 'hub_sso_lib'
