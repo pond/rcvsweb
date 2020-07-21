@@ -1,0 +1,66 @@
+<% content_for :you_are_currently_browsing do -%>
+You are currently browsing the historic <b>CVS</b> repository, which is no longer updated.<br />
+Revisions can be listed by
+<%= link_to 'log message', { :controller => 'revisions', :action => 'list' } %> (fast) or
+<%= link_to 'revision number', { :controller => 'revisions', :action => 'revisions' } %> (slow).<br />
+The GitLab server is <a href="https://gitlab.riscosopen.org/RiscOS">here</a>.
+<% end -%>
+
+<%
+  common = @output[0]
+
+  if common[:folder] && common[:folder].length > 40
+    folder = '...' + common[:folder][-40..-1]
+  else
+    folder = common[:folder] || ''
+  end
+-%>
+      <div class="breadcrumbs_mod"><div class="breadcrumbs">
+        <ul>
+          <li><%= link_to 'Revisions', { :action => 'revisions' } %></li>
+          <li>&#187; Revision <%= common[:revision] %> of <%= folder %></li>
+        </ul>
+      </div></div>
+
+      <div id="revisions">
+        <h2>Revision <%= common[:revision] %></h2>
+        <strong>of <%= folder %></strong>
+
+        <p>
+        <div class="log">
+          <%= format_with_collaboa_links(common[:log]) %>
+        </div>
+
+        <ul class="changes">
+          <li><strong>Comitted by:</strong> <%= common[:author] %></li>
+          <li><strong>Date:</strong> <%= common[:date] %> (<%= time_ago_in_words(common[:date]) %> ago)</li>
+        </ul>
+
+        <h2>Affected files:</h2>
+        <ul class="changes">
+<% @output.each do |file| -%>
+          <li class="change-name">
+<%
+  if @category_map.include? file[:category]
+    imgsrc = @category_map[file[:category]][:image]
+  else
+    imgsrc = @category_map[:unknown][:image]
+  end
+-%>
+            <img alt="<%= file[:category] %>" title="<%= file[:category] %>" src="<%= imgsrc %>" />
+<% if file[:category] != 'Removal' -%>
+            <a href="<%= url_for(:controller=>'rcvsweb', :action=>'run', :url=>file[:path], :only_path => true) %>"><%= file[:path] %></a>
+<% else -%>
+            <%= file[:path] %>
+<% end -%>
+            <%=
+              if @category_map.include? file[:category]
+                @category_map[file[:category]][:text]
+              else
+                @category_map[:unknown][:text]
+              end
+            %>
+          </li>
+<% end -%>
+        </ul>
+      </div>

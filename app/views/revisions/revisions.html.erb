@@ -1,0 +1,23 @@
+<% content_for :you_are_currently_browsing do -%>
+You are currently browsing the historic <b>CVS</b> repository, which is no longer updated.<br />
+Revisions can be listed by
+<%= link_to 'log message', { :controller => 'revisions', :action => 'list' } %> (fast) or
+<%= link_to 'revision number', { :controller => 'revisions', :action => 'revisions' } %> (slow).<br />
+The GitLab server is <a href="https://gitlab.riscosopen.org/RiscOS">here</a>.
+<% end -%>
+
+      <div id="revisions">
+<% @output.each do |item| -%>
+        <h3><%= link_to "Revision #{item[:revision]}", { :action => 'show', :ident => item[:key] } %>:</h3>
+        <small>of <%= item[:folder] %></small>
+        <ul class="changes">
+          <li><strong>Author:</strong> <%= item[:author] %></li>
+          <li><strong>Date:</strong> <%= item[:date] %></li>
+        </ul>
+        <div class="log-small">
+          <p>
+            <%= format_with_collaboa_links(item[:log]) %>
+          </p>
+        </div>
+<% end %>
+      </div>

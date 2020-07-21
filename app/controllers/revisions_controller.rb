@@ -5,7 +5,7 @@ class RevisionsController < ApplicationController
   def list
     # Use cvslog2web output directly for a list of recent changes.
 
-    render :file => "#{CVSLOG2WEB_OUTPUT}/recent.html", :layout => 'default'
+    render :file => "#{CVSLOG2WEB_OUTPUT}/recent.html", :layout => 'application'
   end
 
   def logs
@@ -21,13 +21,15 @@ class RevisionsController < ApplicationController
     filename = "#{CVSLOG2WEB_OUTPUT}/#{log}.html"
 
     if File.file?(filename)
-      render :file => filename, :layout => 'default'
+      render :file => filename, :layout => 'application'
     else
       raise ActionController::RoutingError.new('Not Found')
     end
   end
 
   def revisions
+    @title = "Revisions"
+
     # Create a revision parser for a CVSHistory RSS feed. Get a
     # hash keyed by revision number (as a string), each entry
     # containing an array of RevisionDetails objects. Sort the
@@ -60,17 +62,19 @@ class RevisionsController < ApplicationController
 
     # Render the default layout to create the revision list.
 
-    render :layout => 'default'
+    render :layout => 'application'
   end
 
   def show
+    @title = "Revision details"
+
     # The 'list' action creates links that create a parameter 'ident' in the
-    # @params hash. This is a key to a revision hash entry. Extract the relevant
+    # params hash. This is a key to a revision hash entry. Extract the relevant
     # hash and pass it to the view.
 
     parser    = RevisionParser.new(get_parser_url())
     revisions = parser.fetch_and_parse(true)
-    @output   = revisions[@params[:ident]]
+    @output   = revisions[params[:ident]]
 
     # Sort the array of revised files by category of action then by path.
 
@@ -91,11 +95,13 @@ class RevisionsController < ApplicationController
                       :unknown   => { :image => '/tracker/images/icon_file.gif',  :text => '?'   }
                     }
 
-    render :layout => 'default'
+    render :layout => 'application'
   end
 
-  # Synthesised revisions: return the CVS History feed URL.
+private
 
+  # Synthesised revisions: return the CVS History feed URL.
+  #
   def get_parser_url
 
     # For sites that hold a development service on usual port numbers,
